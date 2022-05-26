@@ -5,7 +5,7 @@ namespace Phqzing;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as TE;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\event\entity\{EntityDamageByEntityEvent, EntityDamageEvent};
 use pocketmine\event\player\{PlayerJoinEvent, PlayerQuitEvent};
 use pocketmine\command\{CommandSender, Command};
@@ -15,7 +15,7 @@ class ComboCounter extends PluginBase implements Listener {
   public $combo = [];
   private static $instance;
   
-  public function onEnable(){
+  public function onEnable(): void{
     self::$instance = $this;
     @mkdir($this->getDataFolder());
     $this->saveDefaultConfig();
@@ -41,7 +41,7 @@ class ComboCounter extends PluginBase implements Listener {
     }
   }
                                
-  public function onJoim(PlayerJoinEvent $ev){
+  public function onJoin(PlayerJoinEvent $ev){
     $player = $ev->getPlayer();
     
     if($this->getConfig()->get("on-by-default") == "true"){
